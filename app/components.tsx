@@ -105,6 +105,24 @@ const NAV_ITEMS = [
   { key: "contact", href: "/section/contact" },
 ] as const;
 
+const FOOTER_QUICK_LINKS = [
+  "home",
+  "about",
+  "councils",
+  "learning",
+  "events",
+  "contact",
+] as const;
+
+const NAV_HREF: Record<(typeof FOOTER_QUICK_LINKS)[number], string> = {
+  home: "/",
+  about: "/section/about",
+  councils: "/section/councils",
+  learning: "/section/learning",
+  events: "/section/events",
+  contact: "/section/contact",
+};
+
 export async function SiteShell({ children }: { children: React.ReactNode }) {
   const t = await getTranslations();
   const locale = (await getLocale()) as Locale;
@@ -171,13 +189,131 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
       </header>
       <main>{children}</main>
       <footer className="footer">
-        <div>
-          <strong>{schoolName}</strong>
-          <p>{t("footer.description")}</p>
+        <div className="footer-main">
+          <div className="footer-col">
+            <Link href="/" className="footer-brand">
+              <span className="footer-brand-mark">
+                <Image
+                  src={schoolConfig.assets.logo}
+                  alt=""
+                  width={44}
+                  height={44}
+                />
+              </span>
+              <span>
+                <span className="footer-brand-name">{schoolName}</span>
+                <span className="footer-brand-region">
+                  {schoolConfig.region[locale]}
+                </span>
+              </span>
+            </Link>
+            <p className="footer-description">{t("footer.description")}</p>
+          </div>
+
+          <div className="footer-col">
+            <h3>{t("footer.quickLinks")}</h3>
+            <ul className="footer-links">
+              {FOOTER_QUICK_LINKS.map((key) => (
+                <li key={key}>
+                  <Link href={NAV_HREF[key]}>
+                    {t(`nav.${key}` as Parameters<typeof t>[0])}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h3>{t("footer.contacts")}</h3>
+            <div className="footer-contact">
+              <div className="footer-contact-item">
+                <span className="footer-contact-label">
+                  {t("contact.addressLabel")}
+                </span>
+                <span className="footer-contact-value">
+                  {schoolConfig.address[locale]}
+                </span>
+              </div>
+              <div className="footer-contact-item">
+                <span className="footer-contact-label">
+                  {t("contact.phoneLabel")}
+                </span>
+                <a
+                  href={`tel:${schoolConfig.phone.tel}`}
+                  className="footer-contact-value"
+                >
+                  {schoolConfig.phone.display}
+                </a>
+              </div>
+              <div className="footer-contact-item">
+                <span className="footer-contact-label">
+                  {t("contact.emailLabel")}
+                </span>
+                <a
+                  href={`mailto:${schoolConfig.email}`}
+                  className="footer-contact-value"
+                >
+                  {schoolConfig.email}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer-col">
+            <h3>{t("footer.follow")}</h3>
+            <div className="footer-social-row">
+              {schoolConfig.social.facebook ? (
+                <a
+                  href={schoolConfig.social.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="footer-social-btn footer-social-btn--facebook"
+                  aria-label={t("contact.facebookLabel")}
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M22 12a10 10 0 1 0-11.56 9.87v-6.99H7.9V12h2.54v-2.2c0-2.5 1.49-3.89 3.77-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.88h-2.33v6.99A10 10 0 0 0 22 12z" />
+                  </svg>
+                </a>
+              ) : null}
+              {schoolConfig.social.youtube ? (
+                <a
+                  href={schoolConfig.social.youtube}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="footer-social-btn footer-social-btn--youtube"
+                  aria-label={t("contact.youtubeLabel")}
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.57 3.5 12 3.5 12 3.5s-7.57 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.13C4.43 20.5 12 20.5 12 20.5s7.57 0 9.38-.56a3.02 3.02 0 0 0 2.12-2.13A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.75 15.5V8.5l6.25 3.5-6.25 3.5z" />
+                  </svg>
+                </a>
+              ) : null}
+            </div>
+          </div>
         </div>
-        <div className="footer-credits">
-          <small>{t("footer.madeBy")}</small>
-          <strong>{schoolConfig.shortName[locale]}</strong>
+
+        <div className="footer-bottom">
+          <div className="footer-bottom-inner">
+            <span>
+              © {new Date().getFullYear()} {schoolName}. {t("footer.rights")}
+            </span>
+            <span className="footer-bottom-credits">
+              {t("footer.madeBy")}{" "}
+              <strong>{schoolConfig.shortName[locale]}</strong>
+            </span>
+          </div>
         </div>
       </footer>
     </>

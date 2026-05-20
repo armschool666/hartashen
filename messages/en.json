@@ -11,7 +11,11 @@
   },
   "footer": {
     "description": "News, announcements, learning materials and school life.",
-    "madeBy": "Website created by"
+    "madeBy": "Website created by",
+    "quickLinks": "Navigation",
+    "contacts": "Contacts",
+    "follow": "Follow us",
+    "rights": "All rights reserved."
   },
   "mobileMenu": {
     "openLabel": "Open menu",

@@ -57,9 +57,9 @@ export const schoolConfig: SchoolConfig = {
     youtube: "https://www.youtube.com/",
   },
   map: {
-    lat: 40.818,
-    lon: 43.885,
-    bboxRadius: 0.04,
+    lat: 40.8472,
+    lon: 43.8741,
+    bboxRadius: 0.02,
   },
   assets: {
     logo: "/logo.jpg",
