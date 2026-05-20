@@ -1,20 +1,34 @@
 {
   "layout": {
-    "title": "Хацикская средняя школа | Официальный сайт",
-    "description": "Официальный сайт Хацикской средней школы — объявления, отчёты, учебные материалы, советы, мероприятия и контакты."
+    "titleSuffix": "Официальный сайт",
+    "description": "Официальный сайт школы — объявления, отчёты, учебные материалы, советы, мероприятия и контакты."
   },
   "header": {
-    "schoolName": "Хацикская средняя школа",
     "tagline": "Официальная информационная платформа",
     "navAriaLabel": "Главная навигация",
     "langLabel": "Язык",
     "submenu": "подменю"
   },
   "footer": {
-    "schoolName": "Хацикская средняя школа",
     "description": "Новости, объявления, учебные материалы и школьная жизнь.",
-    "madeBy": "Сайт создан",
-    "madeByName": "Хацик"
+    "madeBy": "Сайт создан"
+  },
+  "mobileMenu": {
+    "openLabel": "Открыть меню",
+    "closeLabel": "Закрыть меню"
+  },
+  "login": {
+    "title": "Вход в админ-панель",
+    "description": "Введите логин и пароль для доступа к управлению сайтом.",
+    "loginLabel": "Логин",
+    "passwordLabel": "Пароль",
+    "loginPlaceholder": "admin",
+    "passwordPlaceholder": "••••••••••••",
+    "submit": "Войти",
+    "submitting": "Проверка...",
+    "tooManyAttempts": "Слишком много попыток. Попробуйте снова через 15 минут.",
+    "invalidCredentials": "Неверный логин или пароль. Попробуйте ещё раз.",
+    "networkError": "Ошибка соединения. Проверьте интернет-подключение."
   },
   "nav": {
     "home": "Главная",
@@ -71,8 +85,6 @@
     "contactMap": "Адрес и карта"
   },
   "home": {
-    "eyebrow": "Ширакская область",
-    "heroTitle": "Хацикская средняя школа",
     "heroDescription": "Платформа для родителей, учеников и учителей — объявления, отчёты, учебные материалы и школьная жизнь.",
     "heroImgAlt": "Классная комната",
     "btnAbout": "О школе",
@@ -100,61 +112,36 @@
     "noMaterials": "В этом разделе материалов пока нет.",
     "backToArchive": "Открыть архив"
   },
-  "archive": {
-    "eyebrow": "Архив",
-    "title": "Архив материалов сайта",
-    "description": "Все импортированные материалы сайта по разделам, подразделам и годам.",
-    "statMaterials": "материалов",
-    "statFiles": "файлов",
-    "statGroups": "групп",
-    "sectionEyebrow": "Раздел",
-    "noMaterials": "В этом разделе материалов пока нет."
-  },
   "userMaterials": {
     "eyebrow": "Обновления",
     "title": "Добавленные материалы",
-    "openFile": "Открыть файл"
-  },
-  "sectionTitles": {
-    "about": "О школе",
-    "councils": "Советы",
-    "staff": "Персонал",
-    "resources": "Здание и ресурсы",
-    "learning": "Учебный процесс",
-    "events": "Школьная жизнь",
-    "students": "Ученики",
-    "creativity": "Творчество",
-    "competitions": "Конкурсы",
-    "contact": "Контакты"
+    "openFile": "Открыть файл",
+    "noMaterials": "В этом разделе материалов пока нет."
   },
   "contact": {
     "homeLink": "Главная",
     "eyebrow": "Контакты",
-    "title": "Связаться с Хацикская средняя школой",
     "description": "Отправьте сообщение, проверьте адрес или найдите нас в социальных сетях.",
     "infoEyebrow": "Контактные данные",
     "infoTitle": "Контактные данные",
     "addressLabel": "Адрес",
-    "addressValue": "РА, Ширакская обл., с. Хацик, ул. 13, тупик 1, зд. 3",
     "phoneLabel": "Телефон",
-    "phoneValue": "+374 93 26-71-26",
     "emailLabel": "Эл. почта",
-    "emailValue": "info@hatsikschool.am",
     "feedbackEyebrow": "Обратная связь",
     "feedbackTitle": "Отправьте сообщение",
-    "feedbackDescription": "Заполните форму и мы ответим как можно скорее.",
+    "feedbackDescription": "Заполните форму — откроется ваш почтовый клиент с готовым сообщением.",
     "feedbackName": "Ваше имя",
     "feedbackNamePlaceholder": "Имя Фамилия",
     "feedbackEmail": "Эл. почта (необязательно)",
     "feedbackEmailPlaceholder": "example@mail.com",
     "feedbackMessage": "Сообщение",
     "feedbackMessagePlaceholder": "Ваше сообщение...",
-    "feedbackSend": "Отправить",
-    "feedbackSending": "Отправка...",
-    "feedbackSent": "Сообщение отправлено. Спасибо!",
+    "feedbackSend": "Открыть в почтовом клиенте",
+    "feedbackSending": "Открываем...",
+    "feedbackSent": "Письмо подготовлено в вашем почтовом клиенте.",
     "mapEyebrow": "Адрес и карта",
     "mapTitle": "Как нас найти",
-    "mapAriaLabel": "село Хацик — OpenStreetMap",
+    "mapAriaLabel": "OpenStreetMap",
     "socialEyebrow": "Социальные сети",
     "socialTitle": "Следите за нами",
     "socialDescription": "Новости школы, фотографии и видео доступны по следующим каналам.",

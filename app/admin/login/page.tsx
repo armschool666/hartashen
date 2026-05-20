@@ -1,8 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { schoolConfig, type SchoolLocale } from "../../../school.config";
 
 export default function LoginPage() {
+  const t = useTranslations("login");
+  const locale = useLocale() as SchoolLocale;
+  const initial = schoolConfig.shortName[locale].slice(0, 1);
   const [login, setLogin] = useState("");
   const [token, setToken] = useState("");
   const [error, setError] = useState("");
@@ -23,12 +28,12 @@ export default function LoginPage() {
       if (response.ok) {
         window.location.href = "/admin";
       } else if (response.status === 429) {
-        setError("Слишком много попыток. Попробуйте снова через 15 минут.");
+        setError(t("tooManyAttempts"));
       } else {
-        setError("Неверный логин или пароль. Попробуйте ещё раз.");
+        setError(t("invalidCredentials"));
       }
     } catch {
-      setError("Ошибка соединения. Проверьте интернет-подключение.");
+      setError(t("networkError"));
     } finally {
       setLoading(false);
     }
@@ -37,17 +42,17 @@ export default function LoginPage() {
   return (
     <main className="login-wrap">
       <form className="login-form" onSubmit={handleSubmit}>
-        <div className="login-logo">Փ</div>
-        <h1>Вход в админ-панель</h1>
-        <p>Введите логин и пароль для доступа к управлению сайтом.</p>
+        <div className="login-logo">{initial}</div>
+        <h1>{t("title")}</h1>
+        <p>{t("description")}</p>
 
         <label>
-          Логин
+          {t("loginLabel")}
           <input
             type="text"
             value={login}
             onChange={(e) => setLogin(e.target.value)}
-            placeholder="admin"
+            placeholder={t("loginPlaceholder")}
             autoFocus
             autoComplete="username"
             required
@@ -55,12 +60,12 @@ export default function LoginPage() {
         </label>
 
         <label>
-          Пароль
+          {t("passwordLabel")}
           <input
             type="password"
             value={token}
             onChange={(e) => setToken(e.target.value)}
-            placeholder="••••••••••••"
+            placeholder={t("passwordPlaceholder")}
             autoComplete="current-password"
             required
           />
@@ -69,7 +74,7 @@ export default function LoginPage() {
         {error ? <p className="login-error">{error}</p> : null}
 
         <button type="submit" disabled={loading}>
-          {loading ? "Проверка..." : "Войти"}
+          {loading ? t("submitting") : t("submit")}
         </button>
       </form>
     </main>

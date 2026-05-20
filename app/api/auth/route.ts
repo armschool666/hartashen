@@ -1,5 +1,8 @@
 import { timingSafeEqual } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { createSession, revokeSession } from "../sessions-store";
+import { SESSION_COOKIE } from "../auth-check";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -7,7 +10,7 @@ export const dynamic = "force-dynamic";
 // In-memory rate limiter — resets on server restart
 const attempts = new Map<string, { count: number; resetAt: number }>();
 const MAX_ATTEMPTS = 5;
-const WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+const WINDOW_MS = 15 * 60 * 1000;
 
 function getClientIp(request: NextRequest): string {
   return (
@@ -66,20 +69,26 @@ export async function POST(request: NextRequest) {
 
   attempts.delete(ip);
 
+  const session = await createSession();
+
   const response = NextResponse.json({ ok: true });
-  response.cookies.set("admin_session", token, {
+  response.cookies.set(SESSION_COOKIE, session.token, {
     httpOnly: true,
     sameSite: "lax",
     path: "/",
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    maxAge: session.maxAgeSec,
   });
   return response;
 }
 
 // DELETE — logout
 export async function DELETE() {
+  const cookieStore = await cookies();
+  const sessionToken = cookieStore.get(SESSION_COOKIE)?.value;
+  await revokeSession(sessionToken);
+
   const response = NextResponse.json({ ok: true });
-  response.cookies.delete("admin_session");
+  response.cookies.delete(SESSION_COOKIE);
   return response;
 }

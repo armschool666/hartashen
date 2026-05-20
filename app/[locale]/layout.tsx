@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
+import { schoolConfig, type SchoolLocale } from "../../school.config";
 
 export async function generateMetadata({
   params,
@@ -11,8 +12,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "layout" });
+  const safeLocale = (routing.locales as readonly string[]).includes(locale)
+    ? (locale as SchoolLocale)
+    : routing.defaultLocale;
   return {
-    title: t("title"),
+    title: `${schoolConfig.name[safeLocale]} | ${t("titleSuffix")}`,
     description: t("description"),
   };
 }
@@ -30,7 +34,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as "hy" | "ru" | "en")) {
+  if (!(routing.locales as readonly string[]).includes(locale)) {
     notFound();
   }
 

@@ -1,5 +1,8 @@
-import { getTranslations } from "next-intl/server";
+import Image from "next/image";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "../i18n/navigation";
+import type { Locale } from "../i18n/routing";
+import { schoolConfig } from "../school.config";
 import { LanguageSwitcher } from "./lang-switcher";
 import { MobileMenu, type MobileNavItem } from "./mobile-menu";
 
@@ -104,6 +107,8 @@ const NAV_ITEMS = [
 
 export async function SiteShell({ children }: { children: React.ReactNode }) {
   const t = await getTranslations();
+  const locale = (await getLocale()) as Locale;
+  const schoolName = schoolConfig.name[locale];
 
   const navData: MobileNavItem[] = NAV_ITEMS.map((item) => ({
     key: item.key,
@@ -123,10 +128,16 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
       <header className="site-header">
         <Link href="/" className="brand">
           <span className="brand-mark">
-            <img src="/logo.jpg" alt="" />
+            <Image
+              src={schoolConfig.assets.logo}
+              alt=""
+              width={44}
+              height={44}
+              priority
+            />
           </span>
           <span>
-            <strong>{t("header.schoolName")}</strong>
+            <strong>{schoolName}</strong>
           </span>
         </Link>
         <nav className="nav" aria-label={t("header.navAriaLabel")}>
@@ -161,12 +172,12 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
       <main>{children}</main>
       <footer className="footer">
         <div>
-          <strong>{t("footer.schoolName")}</strong>
+          <strong>{schoolName}</strong>
           <p>{t("footer.description")}</p>
         </div>
         <div className="footer-credits">
           <small>{t("footer.madeBy")}</small>
-          <strong>{t("footer.madeByName")}</strong>
+          <strong>{schoolConfig.shortName[locale]}</strong>
         </div>
       </footer>
     </>

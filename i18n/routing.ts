@@ -4,3 +4,5 @@ export const routing = defineRouting({
   locales: ["hy", "ru", "en"],
   defaultLocale: "hy",
 });
+
+export type Locale = (typeof routing.locales)[number];

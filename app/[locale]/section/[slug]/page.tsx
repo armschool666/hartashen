@@ -4,8 +4,6 @@ import { Link } from "../../../../i18n/navigation";
 import { SiteShell } from "../../../components";
 import { sections } from "../../../data";
 
-export const dynamic = "force-dynamic";
-
 export function generateStaticParams() {
   return sections.map((section) => ({ slug: section.slug }));
 }
@@ -26,7 +24,8 @@ export default async function SectionPage({
   return (
     <SiteShell>
       <section className="subhero">
-        <img src={section.image} alt={section.title} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={section.image} alt={section.title} loading="lazy" />
         <div>
           <Link href="/">{t("section.homeLink")}</Link>
           <h1>{section.title}</h1>

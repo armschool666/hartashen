@@ -1,26 +1,8 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
-import type { AdminEntry } from "./user-materials";
+import type { AdminEntry } from "./material-types";
+import { createJsonStore } from "./json-store";
 
-const dataDir = path.join(process.cwd(), "data");
-const dataFile = path.join(dataDir, "materials.json");
+const store = createJsonStore<AdminEntry[]>("materials.json", []);
 
-async function ensureStore() {
-  await mkdir(dataDir, { recursive: true });
-  try {
-    await readFile(dataFile, "utf8");
-  } catch {
-    await writeFile(dataFile, "[]", "utf8");
-  }
-}
-
-export async function readMaterials() {
-  await ensureStore();
-  const value = await readFile(dataFile, "utf8");
-  return JSON.parse(value) as AdminEntry[];
-}
-
-export async function writeMaterials(entries: AdminEntry[]) {
-  await ensureStore();
-  await writeFile(dataFile, JSON.stringify(entries, null, 2), "utf8");
-}
+export const readMaterials = () => store.read();
+export const writeMaterials = (entries: AdminEntry[]) => store.write(entries);
+export const updateMaterials = store.update;

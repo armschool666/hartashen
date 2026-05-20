@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "../i18n/navigation";
 
 export type MobileNavItem = {
@@ -11,6 +12,7 @@ export type MobileNavItem = {
 };
 
 export function MobileMenu({ items }: { items: MobileNavItem[] }) {
+  const t = useTranslations("mobileMenu");
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
 
@@ -30,7 +32,7 @@ export function MobileMenu({ items }: { items: MobileNavItem[] }) {
     <>
       <button
         className={`burger-btn${open ? " burger-btn--open" : ""}`}
-        aria-label={open ? "Закрыть меню" : "Открыть меню"}
+        aria-label={open ? t("closeLabel") : t("openLabel")}
         aria-expanded={open}
         aria-controls="mobile-nav"
         onClick={() => setOpen((v) => !v)}
@@ -48,7 +50,7 @@ export function MobileMenu({ items }: { items: MobileNavItem[] }) {
         aria-hidden={!open}
       >
         <div className="mobile-nav-top">
-          <button className="mobile-nav-close" onClick={close} aria-label="Закрыть меню">
+          <button className="mobile-nav-close" onClick={close} aria-label={t("closeLabel")}>
             ✕
           </button>
         </div>

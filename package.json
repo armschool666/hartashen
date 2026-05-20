@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --webpack",
     "build": "next build",
-    "import:wordpress": "node --use-system-ca scripts/import-wordpress.mjs",
-    "start": "next start --hostname 127.0.0.1"
+    "start": "next start --hostname 127.0.0.1",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "next": "^16.0.0",
@@ -18,6 +20,9 @@
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.0.0",
+    "prettier": "^3.3.0",
     "typescript": "^5.0.0"
   }
 }

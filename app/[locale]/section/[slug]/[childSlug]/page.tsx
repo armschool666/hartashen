@@ -4,8 +4,6 @@ import { SiteShell } from "../../../../components";
 import { sections } from "../../../../data";
 import { UserMaterials } from "../../../../user-materials";
 
-export const dynamic = "force-dynamic";
-
 export function generateStaticParams() {
   return sections.flatMap((section) =>
     section.links.map((link) => ({
@@ -31,7 +29,8 @@ export default async function ChildSectionPage({
   return (
     <SiteShell>
       <section className="subhero">
-        <img src={section.image} alt={page.title} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={section.image} alt={page.title} loading="lazy" />
         <div>
           <Link href={`/section/${section.slug}`}>{section.title}</Link>
           <h1>{page.title}</h1>

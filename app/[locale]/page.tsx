@@ -1,5 +1,8 @@
-import { getTranslations } from "next-intl/server";
+import Image from "next/image";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "../../i18n/navigation";
+import type { Locale } from "../../i18n/routing";
+import { schoolConfig } from "../../school.config";
 import { SiteShell } from "../components";
 import { sections, news } from "../data";
 
@@ -7,18 +10,24 @@ const FEATURED_SLUGS = ["about", "councils", "learning", "events"];
 
 export default async function Home() {
   const t = await getTranslations();
+  const locale = (await getLocale()) as Locale;
   const featured = sections.filter((s) => FEATURED_SLUGS.includes(s.slug));
 
   return (
     <SiteShell>
       <section className="hero">
-        <img
-          src="/school.jpg"
+        <Image
+          src={schoolConfig.assets.heroImage}
           alt={t("home.heroImgAlt")}
+          width={1600}
+          height={900}
+          priority
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
         />
         <div className="hero-content">
-          <p className="eyebrow">{t("home.eyebrow")}</p>
-          <h1>{t("home.heroTitle")}</h1>
+          <p className="eyebrow">{schoolConfig.region[locale]}</p>
+          <h1>{schoolConfig.name[locale]}</h1>
           <p>{t("home.heroDescription")}</p>
           <div className="hero-actions">
             <Link href="/section/about">{t("home.btnAbout")}</Link>
@@ -50,7 +59,8 @@ export default async function Home() {
               className="feature-card"
               key={section.slug}
             >
-              <img src={section.image} alt={section.title} />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={section.image} alt={section.title} loading="lazy" />
               <div>
                 <h3>{section.title}</h3>
                 <p>{section.description}</p>

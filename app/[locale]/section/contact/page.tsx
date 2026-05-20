@@ -1,32 +1,25 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "../../../../i18n/navigation";
 import { SiteShell } from "../../../components";
 import { ContactForm } from "../../../contact-form";
-
-export const dynamic = "force-dynamic";
-
-const SCHOOL_EMAIL = "info@hatsikschool.am";
-const FACEBOOK_URL = "https://www.facebook.com/hatsikvil1966";
-const YOUTUBE_URL = "https://www.youtube.com/";
-
-// Hatsik village, Shirak Region, Armenia — 4.5 km NE of Gyumri, approx. 40.818°N, 43.885°E
-const MAP_EMBED =
-  "https://www.openstreetmap.org/export/embed.html?bbox=43.815%2C40.778%2C43.955%2C40.858&layer=mapnik&marker=40.818%2C43.885";
+import { mapEmbedUrl, schoolConfig, type SchoolLocale } from "../../../../school.config";
 
 export default async function ContactPage() {
   const t = await getTranslations("contact");
+  const locale = (await getLocale()) as SchoolLocale;
 
   return (
     <SiteShell>
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="subhero">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80"
-          alt={t("title")}
+          src={schoolConfig.assets.heroImage}
+          alt={schoolConfig.name[locale]}
         />
         <div>
           <Link href="/">{t("homeLink")}</Link>
-          <h1>{t("title")}</h1>
+          <h1>{schoolConfig.name[locale]}</h1>
           <p>{t("description")}</p>
         </div>
       </section>
@@ -42,22 +35,20 @@ export default async function ContactPage() {
           <div className="contact-info-grid">
             <div className="contact-info-card">
               <p className="eyebrow">{t("addressLabel")}</p>
-              <strong>{t("addressValue")}</strong>
+              <strong>{schoolConfig.address[locale]}</strong>
             </div>
 
             <div className="contact-info-card">
               <p className="eyebrow">{t("phoneLabel")}</p>
               <strong>
-                <a href={`tel:${t("phoneValue").replace(/\s/g, "")}`}>
-                  {t("phoneValue")}
-                </a>
+                <a href={`tel:${schoolConfig.phone.tel}`}>{schoolConfig.phone.display}</a>
               </strong>
             </div>
 
             <div className="contact-info-card">
               <p className="eyebrow">{t("emailLabel")}</p>
               <strong>
-                <a href={`mailto:${SCHOOL_EMAIL}`}>{SCHOOL_EMAIL}</a>
+                <a href={`mailto:${schoolConfig.email}`}>{schoolConfig.email}</a>
               </strong>
             </div>
           </div>
@@ -74,7 +65,7 @@ export default async function ContactPage() {
             <p>{t("feedbackDescription")}</p>
 
             <ContactForm
-              recipientEmail={SCHOOL_EMAIL}
+              recipientEmail={schoolConfig.email}
               labels={{
                 name: t("feedbackName"),
                 namePlaceholder: t("feedbackNamePlaceholder"),
@@ -95,11 +86,11 @@ export default async function ContactPage() {
               <p className="eyebrow">{t("mapEyebrow")}</p>
               <h2>{t("mapTitle")}</h2>
             </div>
-            <p>{t("addressValue")}</p>
+            <p>{schoolConfig.address[locale]}</p>
 
             <div className="contact-map-frame">
               <iframe
-                src={MAP_EMBED}
+                src={mapEmbedUrl()}
                 title={t("mapAriaLabel")}
                 aria-label={t("mapAriaLabel")}
                 loading="lazy"
@@ -120,8 +111,9 @@ export default async function ContactPage() {
           </p>
 
           <div className="contact-social-links">
+            {schoolConfig.social.facebook ? (
             <a
-              href={FACEBOOK_URL}
+              href={schoolConfig.social.facebook}
               target="_blank"
               rel="noreferrer"
               className="contact-social-link"
@@ -139,9 +131,11 @@ export default async function ContactPage() {
               </svg>
               Facebook
             </a>
+            ) : null}
 
+            {schoolConfig.social.youtube ? (
             <a
-              href={YOUTUBE_URL}
+              href={schoolConfig.social.youtube}
               target="_blank"
               rel="noreferrer"
               className="contact-social-link"
@@ -159,6 +153,7 @@ export default async function ContactPage() {
               </svg>
               YouTube
             </a>
+            ) : null}
           </div>
         </section>
       </div>

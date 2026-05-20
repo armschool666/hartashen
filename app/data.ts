@@ -19,15 +19,6 @@ export type NewsItem = {
   summary: string;
 };
 
-export type NavigationItem = {
-  label: string;
-  href: string;
-  children?: {
-    label: string;
-    href: string;
-  }[];
-};
-
 export const sections: Section[] = [
   {
     slug: "about",
@@ -334,46 +325,6 @@ export const sections: Section[] = [
       },
     ],
   },
-];
-
-export const navigation: NavigationItem[] = [
-  { label: "Գլխավոր", href: "/" },
-  {
-    label: "Դպրոցի մասին",
-    href: "/section/about",
-    children: [
-      { label: "Հայտարարություններ", href: "/section/about/announcements" },
-      { label: "Հաշվետվություններ", href: "/section/about/reports" },
-    ],
-  },
-  {
-    label: "Խորհուրդներ",
-    href: "/section/councils",
-    children: [
-      { label: "Միացյալ կառավարման խորհուրդ", href: "/section/councils/joint-management" },
-      { label: "Մանկավարժական խորհուրդ", href: "/section/councils/pedagogical" },
-      { label: "Ծնողական խորհուրդ", href: "/section/councils/parent" },
-      { label: "Աշակերտական խորհուրդ", href: "/section/councils/student" },
-      { label: "Մ/Մ արձանագրություններ", href: "/section/councils/methodological" },
-    ],
-  },
-  {
-    label: "Ուսումնական գործընթաց",
-    href: "/section/learning",
-    children: [
-      { label: "Քննություններ", href: "/section/learning/exams" },
-      { label: "Նախագծային աշխատանքներ", href: "/section/learning/projects" },
-    ],
-  },
-  {
-    label: "Դպրոցի անցուդարձ",
-    href: "/section/events",
-    children: [
-      { label: "Նորություններ", href: "/section/events/news" },
-      { label: "Միջոցառումներ", href: "/section/events/events" },
-    ],
-  },
-  { label: "Կապ", href: "/section/contact" },
 ];
 
 export const news: NewsItem[] = [

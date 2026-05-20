@@ -1,54 +1,15 @@
-"use client";
-
-import { useEffect, useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
-import { groupFilesByYear, type ImportedFile } from "./imported-content";
-
-export type AdminEntry = {
-  id: string;
-  title: string;
-  sectionSlug: string;
-  sectionTitle: string;
-  pageSlug: string;
-  pageTitle: string;
-  body: string;
-  date: string;
-  files: ImportedFile[];
-};
-
-export type UploadFile = ImportedFile & {
-  name?: string;
-  size?: number;
-};
-
-export function parseFileLinks(value: string) {
-  return value
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => {
-      const [text, ...urlParts] = line.split("|").map((item) => item.trim());
-      const href = urlParts.join("|") || text;
-      return {
-        text: urlParts.length > 0 ? text : "Բացել ֆայլը",
-        href,
-      };
-    });
-}
-
-const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".gif", ".webp"]);
-
-function isImageFile(href: string) {
-  const ext = href.split(".").pop()?.toLowerCase();
-  return ext ? IMAGE_EXTENSIONS.has(`.${ext}`) : false;
-}
+import { getTranslations } from "next-intl/server";
+import { groupFilesByYear, type ImportedFile } from "./file-utils";
+import { isImageFile } from "./material-types";
+import { readMaterials } from "./materials-store";
 
 function FileOrImage({ file, entryId }: { file: ImportedFile; entryId: string }) {
   if (isImageFile(file.href)) {
     return (
       <figure className="material-image" key={`${entryId}-${file.href}`}>
         <a href={file.href} target="_blank" rel="noreferrer">
-          <img src={file.href} alt={file.text || "նկար"} loading="lazy" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={file.href} alt={file.text || ""} loading="lazy" />
         </a>
       </figure>
     );
@@ -65,36 +26,23 @@ function FileOrImage({ file, entryId }: { file: ImportedFile; entryId: string })
   );
 }
 
-export function UserMaterials({
+export async function UserMaterials({
   sectionSlug,
   pageSlug,
 }: {
   sectionSlug: string;
   pageSlug: string;
 }) {
-  const t = useTranslations("userMaterials");
-  const [entries, setEntries] = useState<AdminEntry[]>([]);
-
-  useEffect(() => {
-    fetch("/api/materials")
-      .then((response) => response.json())
-      .then((data: AdminEntry[]) => setEntries(data))
-      .catch(() => setEntries([]));
-  }, []);
-
-  const pageEntries = useMemo(
-    () =>
-      entries.filter(
-        (entry) =>
-          entry.sectionSlug === sectionSlug && entry.pageSlug === pageSlug,
-      ),
-    [entries, pageSlug, sectionSlug],
+  const t = await getTranslations("userMaterials");
+  const entries = await readMaterials();
+  const pageEntries = entries.filter(
+    (entry) => entry.sectionSlug === sectionSlug && entry.pageSlug === pageSlug,
   );
 
   return (
     <section className="section-wrap">
       {pageEntries.length === 0 ? (
-        <p className="no-materials-hint">Այս բաժնում նյութեր դեռ չկան։</p>
+        <p className="no-materials-hint">{t("noMaterials")}</p>
       ) : null}
       <div className="material-list">
         {pageEntries.map((entry) => {

@@ -1,17 +1,17 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SiteShell } from "../components";
+import { SESSION_COOKIE } from "../api/auth-check";
+import { isSessionValid } from "../api/sessions-store";
 import { AdminPanel } from "./panel";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  // Server-side auth check — env var available in server component
   const cookieStore = await cookies();
-  const session = cookieStore.get("admin_session")?.value;
-  const token = process.env.ADMIN_TOKEN;
+  const session = cookieStore.get(SESSION_COOKIE)?.value;
 
-  if (!token || session !== token) {
+  if (!(await isSessionValid(session))) {
     redirect("/admin/login");
   }
 
