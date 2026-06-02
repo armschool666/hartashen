@@ -1,7 +1,7 @@
 import type { AdminEntry } from "./material-types";
-import { createJsonStore } from "./json-store";
+import { createBlobJsonStore } from "./blob-json-store";
 
-const store = createJsonStore<AdminEntry[]>("materials.json", []);
+const store = createBlobJsonStore<AdminEntry[]>("data/materials.json", []);
 
 export const readMaterials = () => store.read();
 export const writeMaterials = (entries: AdminEntry[]) => store.write(entries);
