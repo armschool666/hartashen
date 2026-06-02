@@ -1,60 +1,41 @@
-import { createHash, randomBytes } from "node:crypto";
-import { createJsonStore } from "../json-store";
+import { createHmac, timingSafeEqual } from "node:crypto";
 
-/**
- * Хранилище админ-сессий.
- *
- * Cookie клиента — это случайный идентификатор сессии.
- * На диске хранится SHA-256 от идентификатора + срок жизни.
- * Так даже при утечке файла сессий — токены не вытаскиваются.
- */
+const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 7; // 7 days
 
-type Session = {
-  hash: string;
-  expiresAt: number;
-};
-
-type SessionsFile = {
-  sessions: Session[];
-};
-
-const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 7;
-
-const store = createJsonStore<SessionsFile>("sessions.json", { sessions: [] });
-
-function hashToken(token: string): string {
-  return createHash("sha256").update(token).digest("hex");
+function signingKey(): string {
+  const key = process.env.ADMIN_TOKEN;
+  if (!key) throw new Error("ADMIN_TOKEN is not set");
+  return key;
 }
 
-function isAlive(session: Session, now: number): boolean {
-  return session.expiresAt > now;
+function sign(payload: string): string {
+  return createHmac("sha256", signingKey()).update(payload).digest("hex");
 }
 
 export async function createSession(): Promise<{ token: string; maxAgeSec: number }> {
-  const token = randomBytes(32).toString("hex");
-  const hash = hashToken(token);
-  const now = Date.now();
-  const expiresAt = now + SESSION_TTL_MS;
-
-  await store.update((file) => ({
-    sessions: [...file.sessions.filter((s) => isAlive(s, now)), { hash, expiresAt }],
-  }));
-
+  const expiresAt = Date.now() + SESSION_TTL_MS;
+  const payload = String(expiresAt);
+  const sig = sign(payload);
+  const token = `${payload}.${sig}`;
   return { token, maxAgeSec: Math.floor(SESSION_TTL_MS / 1000) };
 }
 
 export async function isSessionValid(token: string | undefined): Promise<boolean> {
   if (!token) return false;
-  const hash = hashToken(token);
-  const file = await store.read();
-  const now = Date.now();
-  return file.sessions.some((s) => s.hash === hash && isAlive(s, now));
+  const dot = token.lastIndexOf(".");
+  if (dot === -1) return false;
+  const payload = token.slice(0, dot);
+  const sig = token.slice(dot + 1);
+  const expected = sign(payload);
+  try {
+    if (!timingSafeEqual(Buffer.from(sig, "hex"), Buffer.from(expected, "hex"))) return false;
+  } catch {
+    return false;
+  }
+  const expiresAt = Number(payload);
+  return Number.isFinite(expiresAt) && Date.now() < expiresAt;
 }
 
-export async function revokeSession(token: string | undefined): Promise<void> {
-  if (!token) return;
-  const hash = hashToken(token);
-  await store.update((file) => ({
-    sessions: file.sessions.filter((s) => s.hash !== hash),
-  }));
+export async function revokeSession(_token: string | undefined): Promise<void> {
+  // Stateless — revocation is handled by clearing the cookie on the client.
 }
