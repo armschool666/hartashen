@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Конфиг конкретной школы.
  *
  * Это единственное место, которое нужно менять, чтобы клонировать сайт
@@ -66,9 +66,9 @@ export const schoolConfig: SchoolConfig = {
     heroImage: "/school.jpg",
   },
   name: {
-    hy: "Մարալիկի թիվ 2 հիմնական դպրոց",
-    ru: "Начальная школа Маралик № 2",
-    en: "Maralik Primary School No. 2",
+    hy: "Մարալիկի թիվ 2 միջնակարգ դպրոց",
+    ru: "Средняя школа Маралик № 2",
+    en: "Maralik Secondary School No. 2",
   },
   shortName: {
     hy: "Մարալիկ 2",

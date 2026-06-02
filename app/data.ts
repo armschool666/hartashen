@@ -1,4 +1,4 @@
-export type SectionPage = {
+﻿export type SectionPage = {
   slug: string;
   title: string;
   body: string;
@@ -235,8 +235,8 @@ export const sections: Section[] = [
     links: [
       {
         slug: "advanced",
-        title: "Առաջադեմ աշակերտներ",
-        body: "Առաջադեմ աշակերտների էջում ներկայացվում են ուսման և հասարակական ակտիվության մեջ աչքի ընկած աշակերտները։",
+        title: "Նեռառական կրթություն",
+        body: "Նեռառական կրթություն։",
       },
       {
         slug: "award-winners",

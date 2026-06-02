@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import { Link } from "../../../../../i18n/navigation";
 import { SiteShell } from "../../../../components";
 import { sections } from "../../../../data";
@@ -22,7 +22,7 @@ export default async function HistoryPage() {
 
       <section className="section-wrap">
         <div className="history-prose">
-          <p> Մարալիկ թիվ 2 հիմնական դպրոց </p>
+          <p> Մարալիկ թիվ 2 միջնակարգ դպրոց </p>
         </div>
       </section>
     </SiteShell>
