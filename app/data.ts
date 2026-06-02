@@ -235,7 +235,7 @@ export const sections: Section[] = [
     links: [
       {
         slug: "advanced",
-        title: "Նեռառական կրթություն",
+        title: "Ներառական կրթություն",
         body: "Նեռառական կրթություն։",
       },
       {
