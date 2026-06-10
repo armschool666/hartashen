@@ -1,9 +1,9 @@
-﻿/**
- * Конфиг конкретной школы.
+/**
+ * Կոնֆիգ կոնկրետ դպրոցի։
  *
- * Это единственное место, которое нужно менять, чтобы клонировать сайт
- * под другую школу. Тексты (название, описание, адрес) локализованы:
- * правьте здесь — никаких хардкодов в коде или messages/*.json.
+ * Սա է միակ տեղը, որ պետք է փոխել, երբ կայքը կլոնավորվում է
+ * մեկ այլ դպրոցի համար։ Տեքստերը (անուն, նկարագրություն, հասցե) տեղայնացված են.
+ * փոխիր այստեղ — ոչ hardcod-ներ կոդում կամ messages/*.json-ում։
  */
 
 export type SchoolLocale = "hy" | "ru" | "en";
@@ -46,34 +46,34 @@ export interface SchoolConfig {
 }
 
 export const schoolConfig: SchoolConfig = {
-  domain: "maralik2school.am",
-  email: "maralik-tiv2@mail.ru",
+  domain: "hartashen-school.am",
+  email: "hartashen.shirak@gmail.com",
   phone: {
-    display: "+374 98-27-07-69",
-    tel: "+37498270769",
+    display: "+374 96 36-27-44",
+    tel: "+37496362744",
   },
   social: {
-    facebook: "https://www.facebook.com/t.iv.erku.dproc.maralik",
+    facebook: "",
     youtube: "",
   },
   map: {
-    lat: 40.577581, 
-    lon: 43.866813,
+    lat: 41.0120,
+    lon: 43.6080,
     bboxRadius: 0.02,
   },
   assets: {
     logo: "/logo.jpg",
-    heroImage: "/school.jpg",
+    heroImage: "/dproc.jpg",
   },
   name: {
-    hy: "Մարալիկի թիվ 2 միջնակարգ դպրոց",
-    ru: "Средняя школа Маралик № 2",
-    en: "Maralik Secondary School No. 2",
+    hy: "Հարթաշենի հիմնական դպրոց",
+    ru: "Основная школа Харташен",
+    en: "Hartashen Basic School",
   },
   shortName: {
-    hy: "Մարալիկ 2",
-    ru: "Маралик 2",
-    en: "Maralik 2",
+    hy: "Հարթաշեն",
+    ru: "Харташен",
+    en: "Hartashen",
   },
   tagline: {
     hy: "Պաշտոնական տեղեկատվական հարթակ",
@@ -81,9 +81,9 @@ export const schoolConfig: SchoolConfig = {
     en: "Official information portal",
   },
   address: {
-    hy: "ՀՀ Շիրակի մարզ, քաղաք Մարալիկ, Կոլտնտեսականների 2 / 1",
-    ru: "РА Ширакская область г. Маралик, Кольтнецекёнканер 2/1",
-    en: "RA Shirak region city Maralik, Koltnetseksyonkaner 2 / 1",
+    hy: "ՀՀ Շիրակի մարզ, գ. Հարթաշեն",
+    ru: "РА Ширакская область, с. Харташен",
+    en: "RA Shirak region, village Hartashen",
   },
   region: {
     hy: "Շիրակի մարզ",

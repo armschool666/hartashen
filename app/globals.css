@@ -1,13 +1,13 @@
 :root {
-  --ink: #1a2535;
-  --muted: #4a6a56;
-  --line: #c8ddd2;
+  --ink: #1e1214;
+  --muted: #6b4a4a;
+  --line: #e8d4d0;
   --surface: #ffffff;
-  --soft: #f0f6f2;
-  --green: #1a4731;
-  --leaf: #3a7a5a;
+  --soft: #faf5f0;
+  --green: #7b1a1a;
+  --leaf: #a52828;
   --rose: #b85c62;
-  --gold: #c49a3a;
+  --gold: #c9a227;
 }
 
 * {
@@ -202,7 +202,7 @@ img {
   position: absolute;
   inset: 0;
   content: "";
-  background: linear-gradient(90deg, rgba(15, 31, 23, 0.58), rgba(15, 31, 23, 0.28) 55%, rgba(15, 31, 23, 0.06));
+  background: linear-gradient(90deg, rgba(40, 8, 8, 0.65), rgba(40, 8, 8, 0.32) 55%, rgba(40, 8, 8, 0.08));
 }
 
 .hero-content {

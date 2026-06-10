@@ -21,95 +21,34 @@ export default async function LeadershipPage() {
       </section>
 
       <section className="section-wrap">
-        <div className="leadership-grid">
+        <div className="leadership-grid" style={{ gridTemplateColumns: "1fr" }}>
 
-          {/* ── Ձախ ── Տնօրեն ────────────────────────────────── */}
-          <div className="leader-card">
-            <div className="leader-photo-wrap">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/տնօրեն.jpg"
-                alt="Իրինա Կիրովի Հովհաննիսյան"
-                className="leader-photo"
-              />
-            </div>
+          {/* ── Տнőрен ── */}
+          <div className="leader-card" style={{ maxWidth: 560 }}>
             <div className="leader-body">
-              <p className="director-role">Տնօրեն</p>
-              <h2 className="leader-name">Իրինա Կիրովի Հովհաննիսյան</h2>
-              <p className="leader-position">Տնօրենի պաշտոնակատար</p>
+              <p className="director-role">Тнőрен</p>
+              <h2 className="leader-name">Ālvard Nuribeki Mateosyan</h2>
 
               <div className="leader-details">
                 <div className="leader-detail-row">
-                  <span className="leader-detail-label">Կրթությունը</span>
-                  <span>Բարձրագույն</span>
+                  <span className="leader-detail-label">Krtutjуny</span>
+                  <span>Bars-ragujyn</span>
                 </div>
                 <div className="leader-detail-row">
-                  <span className="leader-detail-label">Մասնագիտությունը</span>
-                  <span>Կենսաբանության և քիմիայի ուսուցչուհի</span>
+                  <span className="leader-detail-label">El. poste</span>
+                  <span>
+                    <a href="mailto:hartashen.shirak@gmail.com">
+                      hartashen.shirak@gmail.com
+                    </a>
+                  </span>
+                </div>
+                <div className="leader-detail-row">
+                  <span className="leader-detail-label">Herakhos</span>
+                  <span>
+                    <a href="tel:+37496362744">+374 96 36-27-44</a>
+                  </span>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* ── Աջ ── Վարչատնտեսական մասի համակարգող ──────── */}
-          <div className="leader-card">
-            <div className="leader-photo-wrap">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/վարչատնտեսական1.jpg"
-                alt="Նաիրա Նաիրիի Գասպարյան"
-                className="leader-photo"
-              />
-            </div>
-            <div className="leader-body">
-              <p className="director-role">Վարչատնտեսական մասի համակարգող</p>
-              <h2 className="leader-name">Նաիրա Նաիրիի Գասպարյան</h2>
-              <p className="leader-position">
-                Ծնվել է 1979թ. դեկտեմբերի 23-ին Շիրակի մարզի Լանջիկ գյուղում
-              </p>
-
-              <div className="bio-section" style={{ marginTop: "20px" }}>
-                <h3>Կրթություն</h3>
-                <ul>
-                  <li>
-                    <span className="bio-years">1986–1997</span>
-                    Սովորել և ավարտել է տեղի միջնակարգ դպրոցը
-                  </li>
-                  <li>
-                    <span className="bio-years">1997–1999</span>
-                    Ավարտել է Գյումրու Ան. Շիրակացու անվան մանկավարժական
-                    ուսումնարանը՝ տարրական դասարանների դասվարի որակավորմամբ
-                  </li>
-                  <li>
-                    <span className="bio-years">2007–2012</span>
-                    Ավարտել է Գյումրու Մ. Նալբանդյանի անվան մանկավարժական
-                    ինստիտուտը՝ հայոց լեզվի և գրականության ուսուցչի
-                    որակավորմամբ
-                  </li>
-                </ul>
-              </div>
-
-              <div className="bio-section">
-                <h3>Աշխատանքային գործունեություն</h3>
-                <ul>
-                  <li>
-                    <span className="bio-years">2006</span>
-                    Աշխատանքի է անցել Մարալիկի թիվ 2 դպրոցում՝ որպես
-                    համակարգչային օպերատոր
-                  </li>
-                  <li>
-                    <span className="bio-years">2010</span>
-                    Հայոց լեզվի և գրականության ուսուցչուհի
-                  </li>
-                  <li>
-                    <span className="bio-years">2019</span>
-                    ՀՀ Շիրակի մարզպետի N 628-Ա որոշմամբ նշանակվել է
-                    Մարալիկի թիվ 2 միջնակարգ դպրոցի տնօրեն
-                  </li>
-                </ul>
-              </div>
-
-              <p className="leader-family">Ամուսնացած է, ունի երեք երեխա</p>
             </div>
           </div>
 

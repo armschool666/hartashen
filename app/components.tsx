@@ -313,7 +313,14 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
             </span>
             <span className="footer-bottom-credits">
               {t("footer.madeBy")}{" "}
-              <strong>{schoolConfig.shortName[locale]}</strong>
+              <a
+                href="https://businessin.am"
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: "var(--gold)", fontWeight: 800, textDecoration: "none" }}
+              >
+                Business IN
+              </a>
             </span>
           </div>
         </div>
