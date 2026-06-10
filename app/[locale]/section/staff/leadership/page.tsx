@@ -26,16 +26,16 @@ export default async function LeadershipPage() {
           {/* ── Տнőрен ── */}
           <div className="leader-card" style={{ maxWidth: 560 }}>
             <div className="leader-body">
-              <p className="director-role">Тнőрен</p>
-              <h2 className="leader-name">Ālvard Nuribeki Mateosyan</h2>
+              <p className="director-role">Տնօրեն</p>
+              <h2 className="leader-name">Ալվարդ Նուրիբեկի Մաթևոսյան</h2>
 
               <div className="leader-details">
                 <div className="leader-detail-row">
-                  <span className="leader-detail-label">Krtutjуny</span>
-                  <span>Bars-ragujyn</span>
+                  <span className="leader-detail-label">Կրթություն</span>
+                  <span>Բարձրագույն</span>
                 </div>
                 <div className="leader-detail-row">
-                  <span className="leader-detail-label">El. poste</span>
+                  <span className="leader-detail-label">Էլ․ հասցե</span>
                   <span>
                     <a href="mailto:hartashen.shirak@gmail.com">
                       hartashen.shirak@gmail.com
@@ -43,7 +43,7 @@ export default async function LeadershipPage() {
                   </span>
                 </div>
                 <div className="leader-detail-row">
-                  <span className="leader-detail-label">Herakhos</span>
+                  <span className="leader-detail-label">Հեռախոսահամար</span>
                   <span>
                     <a href="tel:+37496362744">+374 96 36-27-44</a>
                   </span>

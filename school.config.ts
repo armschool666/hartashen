@@ -46,7 +46,7 @@ export interface SchoolConfig {
 }
 
 export const schoolConfig: SchoolConfig = {
-  domain: "hartashen-school.am",
+  domain: "hartashenschool.am",
   email: "hartashen.shirak@gmail.com",
   phone: {
     display: "+374 96 36-27-44",
@@ -67,12 +67,12 @@ export const schoolConfig: SchoolConfig = {
   },
   name: {
     hy: "Հարթաշենի հիմնական դպրոց",
-    ru: "Основная школа Харташен",
+    ru: "Основная школа Арташен",
     en: "Hartashen Basic School",
   },
   shortName: {
     hy: "Հարթաշեն",
-    ru: "Харташен",
+    ru: "Арташен",
     en: "Hartashen",
   },
   tagline: {
@@ -82,7 +82,7 @@ export const schoolConfig: SchoolConfig = {
   },
   address: {
     hy: "ՀՀ Շիրակի մարզ, գ. Հարթաշեն",
-    ru: "РА Ширакская область, с. Харташен",
+    ru: "РА Ширакская область, с. Арташен",
     en: "RA Shirak region, village Hartashen",
   },
   region: {
